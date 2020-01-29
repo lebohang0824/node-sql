@@ -19,8 +19,6 @@ const addNewVisitor = (visitor_name, visitor_age, date_of_visit, time_of_visit, 
 	});
 }
 
-// addNewVisitor('Lerato Motaung', 21, '01-27-2020', '12:00', 'Bokamoso Gatebe', 'What a nice place.');
-
 const listAllVisitors = () => {
 
 	const sql = 'SELECT * FROM visitors';
@@ -33,8 +31,6 @@ const listAllVisitors = () => {
 		pool.end();
 	});
 }
-
-// listAllVisitors();
 
 const deleteVisitor = id => {
 
@@ -50,8 +46,6 @@ const deleteVisitor = id => {
 	});
 }
 
-// deleteVisitor(1);
-
 const updateVisitor = (id, visitor_name, visitor_age, date_of_visit, time_of_visit, assistant, comments) => {
 
 	const sql = 'UPDATE visitors SET name = $2, age = $3, date_of_visit = $4, time_of_visit = $5, assistant = $6, comments = $7 WHERE id = $1';
@@ -65,8 +59,6 @@ const updateVisitor = (id, visitor_name, visitor_age, date_of_visit, time_of_vis
 		pool.end();
 	});
 }
-
-// updateVisitor(2, 'Lebohang Mokoena', 28, '01-30-2020', '15:30', 'Letlotlo Mokoena', 'N/A');
 
 const viewOneVisitor = id => {
 
@@ -82,8 +74,6 @@ const viewOneVisitor = id => {
 	});
 }
 
-// viewOneVisitor(2);
-
 const deleteAllVisitors = () => {
 
 	const sql = 'DELETE FROM visitors';
@@ -96,5 +86,3 @@ const deleteAllVisitors = () => {
 		pool.end();
 	});
 }
-
-// deleteAllVisitors();
