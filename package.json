@@ -1,0 +1,14 @@
+{
+  "name": "node-sql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "Lebohang Mokoena",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^7.17.1"
+  }
+}
