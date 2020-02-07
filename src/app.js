@@ -1,49 +1,29 @@
+require('dotenv').config();
+
 const Pool = require("pg").Pool;
-const pool = new Pool({
-	user: "user",
-	database: "db",
-	password: "pass"
-});
+const pool = new Pool();
 
-const addNewVisitor = (visitor_name, visitor_age, date_of_visit, time_of_visit, assistant, comments) => {
+const addNewVisitor = async (visitor_name, visitor_age, date_of_visit, time_of_visit, assistant, comments) => {
 
-	const sql = 'INSERT INTO visitors (name, age, date_of_visit, time_of_visit, assistant, comments) VALUES ($1, $2, $3, $4, $5, $6)';
+	const sql = 'INSERT INTO visitors (name, age, date_of_visit, time_of_visit, assistant, comments) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
 	const data = [visitor_name, visitor_age, date_of_visit, time_of_visit, assistant, comments];
 
-	pool.query(sql, data, (err, res) => {
-		if (err) throw err;
-
-		// Results
-		console.log(res.rows);
-		pool.end();
-	});
+	return await pool.query(sql, data);
 }
 
-const listAllVisitors = () => {
+const listAllVisitors = async () => {
 
 	const sql = 'SELECT * FROM visitors';
 
-	pool.query(sql, (err, res) => {
-		if (err) throw err;
-
-		// Results
-		console.log(res.rows);
-		pool.end();
-	});
+	return await pool.query(sql);
 }
 
-const deleteVisitor = id => {
+const deleteVisitor = async id => {
 
-	const sql = 'DELETE FROM visitors WHERE id = $1';
+	const sql = 'DELETE FROM visitors WHERE id = $1 RETURNING *';
 	const data = [id];
 
-	pool.query(sql, data, (err, res) => {
-		if (err) throw err;
-
-		// Results
-		console.log(res.rows);
-		pool.end();
-	});
+	return await pool.query(sql, data);
 }
 
 const updateVisitor = (id, visitor_name, visitor_age, date_of_visit, time_of_visit, assistant, comments) => {
@@ -86,3 +66,13 @@ const deleteAllVisitors = () => {
 		pool.end();
 	});
 }
+
+module.exports = {
+	addNewVisitor,
+	listAllVisitors,
+	deleteVisitor,
+	updateVisitor,
+	viewOneVisitor,
+	deleteAllVisitors
+}
+

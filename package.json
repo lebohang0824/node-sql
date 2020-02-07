@@ -9,6 +9,7 @@
   "author": "Lebohang Mokoena",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "pg": "^7.17.1"
   }
 }
